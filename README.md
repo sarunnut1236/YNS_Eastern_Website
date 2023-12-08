@@ -4,7 +4,13 @@
 <p>We also didn't think about deployment also.</p>
 <p>Our team is consist of P'Nut., Film, Jungkoon</p>
 
-<p>To run the project in your local host</p>
+<h2>Prerequisites</h2>
+<ul>
+  <li>Node.js</li>
+  <li>TypeScript Runner</li>
+</ul>
+
+<h2>To run the project in your local host</h2>
 <ul>
   <li>cd to '/app' directory</li>
   <li>use command 'npm run dev'</li>
