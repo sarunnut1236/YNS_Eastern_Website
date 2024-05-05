@@ -3,10 +3,11 @@
 import NotifyModal from "@/components/NotifyModal";
 import SelectInput from "@/components/SelectInput";
 import TextInput from "@/components/TextInput";
+import connectDB from "@/lib/connectDb";
 import { getCommunityActivities, getDepartments, getMemberLevel, getRegions, getTShirtSizes } from "@/lib/inputLibs";
 import Image from "next/image";
 import Link from "next/link";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 type Props = {};
 
@@ -96,6 +97,13 @@ const Page = (props: Props) => {
         };
         console.log(JSON.stringify(formData));
     };
+
+    useEffect(() => {
+        const fn = async () => {
+            await connectDB();
+        }
+        fn();
+    }, []);
 
     return (
         <>

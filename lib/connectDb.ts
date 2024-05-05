@@ -1,21 +1,26 @@
-// import { MongoClient } from "mongodb";
+import mongoose, { Model } from "mongoose";
 
+let isConnected: boolean = false;
 
-// export async function connectToDataBase() {
+const connectDB = async () => {
+    mongoose.set("strictQuery", true);
 
-//  if (!process.env.MONGODB_URI) {
-//      throw new Error("Please add your Mongo URI to .env.local");
-//  }
+    if (!process.env.MONGODB_URI) {
+        return console.log("MongoDB URI not found in .env file");
+    }
+    if (isConnected) {
+        return console.log("Already connected to MongoDB");
+    }
 
-//  const uri: string = process.env.MONGODB_URI;
-//  let client: MongoClient;
-//  let clientPromise: Promise<MongoClient>;
+    try {
+        const db: any = await mongoose
+            .connect(process.env.MONGODB_URI as string)
+            .catch((err) => console.error(err));
+        isConnected = db.connections[0].readyState;
+        return console.log(`MongoDB connected: ${db}`);
+    } catch (error) {
+        return console.error(error);
+    }
+};
 
-//      client = new MongoClient(uri);
-//      clientPromise = client.connect();
-
-
-//  // Export a module-scoped MongoClient promise. By doing this in a
-//  // separate module, the client can be shared across functions.
-// //  export default clientPromise; 
-// }
+export default connectDB;
